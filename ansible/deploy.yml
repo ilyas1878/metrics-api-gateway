@@ -1,0 +1,19 @@
+---
+- name: Deploy Metrics API Gateway
+  hosts: localhost
+  become: yes
+  tasks:
+    - name: 1. Установка Docker
+      apt:
+        name: docker.io
+        state: present
+        update_cache: yes
+
+    - name: 2. Установка Docker Compose
+      apt:
+        name: docker-compose
+        state: present
+
+    - name: 3. Запуск проекта через Docker Compose
+      shell: 
+        cmd: cd /path/to/project && docker-compose up -d
