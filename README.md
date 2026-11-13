@@ -28,7 +28,37 @@ API поддерживает два эндпоинта:
 ## Инструкция по запуску
 
 **Способ 1. Через Docker Compose (ручной запуск)**
-1. Убедитесь, что установлены Docker и Docker Compose.
-2. В корневой папке проекта выполните:
+1. Убедитесь, что установлены Docker и Docker Compose. Запустите Docker Desktop и дождитесь появления зеленого статуса Engine running.
+2. В корневой папке проекта выполните в терминале команду для сборки и запуска контейнеров:
    ```bash
    docker-compose up -d --build
+3. Подождите 10-15 секунд, пока контейнеры запустятся и Prometheus соберет первые метрики.
+4. Проверьте работу API. Откройте в браузере Swagger по адресу: http://localhost:8000/docs
+5. Проверьте работу системы мониторинга. Откройте интерфейс Prometheus по адресу: http://localhost:9090
+
+## Примеры запросов к API
+
+Получение загрузки процессора (cpu):
+
+```bash
+curl -X POST http://localhost:8000/api/v1/metrics \
+  -H "Content-Type: application/json" \
+  -d '{"metric": "cpu"}'
+```
+
+Пример ответа от сервера:
+```json
+{
+  "metric": "cpu",
+  "value": 0.53,
+  "unit": "%"
+}
+```
+
+Получение использования оперативной памяти (memory):
+
+```bash
+curl -X POST http://localhost:8000/api/v1/metrics \
+  -H "Content-Type: application/json" \
+  -d '{"metric": "memory"}'
+```
