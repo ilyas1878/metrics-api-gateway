@@ -35,30 +35,3 @@ API поддерживает два эндпоинта:
 3. Подождите 10-15 секунд, пока контейнеры запустятся и Prometheus соберет первые метрики.
 4. Проверьте работу API. Откройте в браузере Swagger по адресу: http://localhost:8000/docs
 5. Проверьте работу системы мониторинга. Откройте интерфейс Prometheus по адресу: http://localhost:9090
-
-## Примеры запросов к API
-
-Получение загрузки процессора (cpu):
-
-```bash
-curl -X POST http://localhost:8000/api/v1/metrics \
-  -H "Content-Type: application/json" \
-  -d '{"metric": "cpu"}'
-```
-
-Пример ответа от сервера:
-```json
-{
-  "metric": "cpu",
-  "value": 0.53,
-  "unit": "%"
-}
-```
-
-Получение использования оперативной памяти (memory):
-
-```bash
-curl -X POST http://localhost:8000/api/v1/metrics \
-  -H "Content-Type: application/json" \
-  -d '{"metric": "memory"}'
-```
